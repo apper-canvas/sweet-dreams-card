@@ -70,7 +70,16 @@ const Header = () => {
           </nav>
 
 {/* Desktop Actions */}
-<div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
+            <Button
+              variant="ghost"
+              size="sm"
+onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="p-2"
+            >
+              <ApperIcon name="Search" size={20} />
+            </Button>
+            
             <Link to="/cart" className="relative">
               <Button variant="ghost" size="sm" className="p-2">
                 <ApperIcon name="ShoppingCart" size={20} />
