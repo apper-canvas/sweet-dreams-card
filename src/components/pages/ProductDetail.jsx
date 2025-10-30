@@ -25,10 +25,14 @@ const ProductDetail = () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await productService.getById(productId);
+const data = await productService.getById(productId);
       setProduct(data);
-      setSelectedSize(data.sizes[0]);
-      setSelectedFlavor(data.flavors[0]);
+      if (data.sizes && data.sizes.length > 0) {
+        setSelectedSize(data.sizes[0]);
+      }
+      if (data.flavors && data.flavors.length > 0) {
+        setSelectedFlavor(data.flavors[0]);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -68,7 +72,7 @@ const ProductDetail = () => {
           <nav className="flex items-center space-x-2 text-sm">
             <Link to="/" className="text-gray-500 hover:text-primary">Home</Link>
             <ApperIcon name="ChevronRight" size={16} className="text-gray-400" />
-            <Link to={`/category/${product.category}`} className="text-gray-500 hover:text-primary">
+<Link to={`/category/${product.category}`} className="text-gray-500 hover:text-primary">
               {product.category}
             </Link>
             <ApperIcon name="ChevronRight" size={16} className="text-gray-400" />
@@ -88,14 +92,14 @@ const ProductDetail = () => {
             <Card className="overflow-hidden">
               <div className="aspect-square">
                 <img
-                  src={product.images[currentImageIndex]}
+src={product.images?.[currentImageIndex] || product.images?.[0]}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
               </div>
             </Card>
             
-            {product.images.length > 1 && (
+{product.images && product.images.length > 1 && (
               <div className="flex space-x-2">
                 {product.images.map((image, index) => (
                   <button
@@ -151,7 +155,7 @@ const ProductDetail = () => {
             <div>
               <h3 className="font-medium text-gray-900 mb-3">Size & Servings</h3>
               <div className="grid grid-cols-1 gap-2">
-                {product.sizes.map((size) => (
+{product.sizes && product.sizes.map((size) => (
                   <button
                     key={size.name}
                     onClick={() => setSelectedSize(size)}
@@ -179,7 +183,7 @@ const ProductDetail = () => {
             <div>
               <h3 className="font-medium text-gray-900 mb-3">Flavor</h3>
               <div className="grid grid-cols-2 gap-2">
-                {product.flavors.map((flavor) => (
+{product.flavors && product.flavors.map((flavor) => (
                   <button
                     key={flavor}
                     onClick={() => setSelectedFlavor(flavor)}
@@ -196,7 +200,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Dietary Info */}
-            {product.dietary.length > 0 && (
+{product.dietary && product.dietary.length > 0 && (
               <div>
                 <h3 className="font-medium text-gray-900 mb-3">Dietary Options</h3>
                 <div className="flex flex-wrap gap-2">

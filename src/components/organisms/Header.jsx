@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "@/layouts/Root";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
@@ -11,6 +12,7 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
   const { getCartItemCount } = useCart();
+const { logout } = useAuth();
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -21,6 +23,10 @@ const Header = () => {
     { name: "Custom Orders", href: "/category/Custom Orders" },
     { name: "Gallery", href: "/gallery" }
   ];
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   const isActive = (href) => {
     if (href === "/") return location.pathname === "/";
@@ -71,6 +77,12 @@ const Header = () => {
 
 {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-4">
+            <button
+              onClick={handleLogout}
+              className="text-gray-700 hover:text-primary transition-colors"
+            >
+              <ApperIcon name="LogOut" size={20} />
+            </button>
             <Button
               variant="ghost"
               size="sm"
@@ -117,6 +129,13 @@ onClick={() => setIsSearchOpen(!isSearchOpen)}
             className="lg:hidden border-t bg-white"
           >
 <div className="px-4 py-2 space-y-1">
+              <button
+                onClick={handleLogout}
+                className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary transition-colors flex items-center gap-2"
+              >
+                <ApperIcon name="LogOut" size={20} />
+                Logout
+              </button>
               <div className="pb-2">
                 <SearchBar onSearch={handleSearch} />
               </div>

@@ -62,10 +62,10 @@ export function CartProvider({ children }) {
 
   const addToCart = (product, customization = {}, quantity = 1) => {
     const cartItem = {
-      id: Date.now() + Math.random(),
+id: Date.now() + Math.random(),
       productId: product.Id,
       productName: product.name,
-      productImage: product.images[0],
+      productImage: product.images?.[0],
       quantity,
       customization,
       price: customization.totalPrice || product.basePrice

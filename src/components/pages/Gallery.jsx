@@ -30,7 +30,7 @@ const Gallery = () => {
       setLoading(true);
       setError(null);
       const data = await galleryService.getAll();
-      setGalleryItems(data);
+setGalleryItems(data);
       setFilteredItems(data);
     } catch (err) {
       setError(err.message);
@@ -106,7 +106,7 @@ const Gallery = () => {
           <AnimatePresence>
             {filteredItems.map((item) => (
               <motion.div
-                key={item.Id}
+key={item.Id}
                 layout
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -119,7 +119,7 @@ const Gallery = () => {
                   <div className="relative">
                     <div className="aspect-square overflow-hidden">
                       <img
-                        src={item.image}
+src={item.image}
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -133,14 +133,14 @@ const Gallery = () => {
                   </div>
                   
                   <div className="p-4">
-                    <h3 className="font-medium text-gray-900 mb-1 line-clamp-1">
+<h3 className="font-medium text-gray-900 mb-1 line-clamp-1">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+<p className="text-sm text-gray-600 mb-2 line-clamp-2">
                       {item.description}
                     </p>
                     <div className="flex items-center justify-between text-xs text-gray-500">
-                      <span>{item.customerName}</span>
+<span>{item.customerName}</span>
                       <span>{new Date(item.date).toLocaleDateString()}</span>
                     </div>
                   </div>
@@ -170,7 +170,7 @@ const Gallery = () => {
             >
               <div className="relative">
                 <img
-                  src={selectedImage.image}
+src={selectedImage.image}
                   alt={selectedImage.title}
                   className="w-full h-auto max-h-[70vh] object-contain"
                 />
@@ -185,17 +185,17 @@ const Gallery = () => {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-bold text-gray-900">
-                    {selectedImage.title}
+{selectedImage.title}
                   </h2>
-                  <Badge variant="secondary">{selectedImage.category}</Badge>
+<Badge variant="secondary">{selectedImage.category}</Badge>
                 </div>
                 
-                <p className="text-gray-600 mb-4">
+<p className="text-gray-600 mb-4">
                   {selectedImage.description}
                 </p>
                 
                 <div className="flex items-center justify-between text-sm text-gray-500">
-                  <span className="font-medium">
+<span className="font-medium">
                     Created for: {selectedImage.customerName}
                   </span>
                   <span>

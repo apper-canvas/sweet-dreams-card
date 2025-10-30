@@ -36,19 +36,18 @@ const Category = () => {
     let filtered = [...products];
 
     if (filters.priceRange) {
-      filtered = filtered.filter(product => 
+filtered = filtered.filter(product => 
         product.basePrice >= filters.priceRange[0] && 
         product.basePrice <= filters.priceRange[1]
       );
     }
 
-    if (filters.dietary.length > 0) {
+if (filters.dietary.length > 0) {
       filtered = filtered.filter(product =>
-        filters.dietary.some(diet => product.dietary.includes(diet))
+        product.dietary && filters.dietary.some(diet => product.dietary.includes(diet))
       );
     }
-
-    if (filters.customizable) {
+if (filters.customizable) {
       filtered = filtered.filter(product => product.customizable);
     }
 
